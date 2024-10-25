@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Employee - Grovix Lab HR Management</title>
+    <style>
+        /* Reset and basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 16px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: #0078e8;
+        }
+
+        /* Main Content Styling */
+        .content {
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #005bb5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            /* Align label and input vertically */
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Flexbox for row layout */
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow wrapping for responsiveness */
+            gap: 20px;
+            /* Add space between items */
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            /* Flex grow for equal width */
+            min-width: 180px;
+            /* Minimum width to maintain layout */
+        }
+
+        .submit-btn {
+            background-color: #0078e8;
+            color: #fff;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        .submit-btn:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Grovix Lab Official Portal</h1>
+        <p>HR Management - Manage Employee Information</p>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/hr">HR</a>
+        <a href="/projects">Projects</a>
+        <a href="/invoicing">Invoicing</a>
+        <a href="/payments">Payments</a>
+        <a href="/support">Support</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Update Employee</h2>
+
+        <form action="/hr/update-employee" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="pinCode">Pin Code</label>
+                    <input type="text" id="pinCode" name="pinCode" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience (Years)</label>
+                <input type="number" id="experience" name="experience" required>
+            </div>
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+            <div class="form-group">
+                <label for="employeeId">Employee ID</label>
+                <input type="text" id="employeeId" name="employeeId" required>
+            </div>
+            <button type="submit" class="submit-btn">Update Employee</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

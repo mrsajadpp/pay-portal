@@ -47,4 +47,13 @@ router.get("/hr/add-employee", verify, (req, res, next) => {
     }
 });
 
+router.get("/hr/update-employee", verify, (req, res, next) => {
+    try {
+        res.render("hr/update-employee", { title: "Update Employee" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 module.exports = router;
