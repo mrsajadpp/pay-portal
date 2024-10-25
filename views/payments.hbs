@@ -177,7 +177,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -186,9 +186,10 @@
 
         <!-- Search and Make Payment Row -->
         <div class="action-row">
-            <div class="search-container">
-                <input type="text" placeholder="Search by Payment ID, Invoice ID, or Customer ID">
-            </div>
+            <form class="search-container" action="/payments/search" method="post">
+                <input type="text" name="query" value="{{query}}"
+                    placeholder="Search by Payment ID, Invoice ID, or Customer ID">
+            </form>
             <a href="/payments/create-payment" class="make-payment-btn">Make Payment</a>
         </div>
 
@@ -199,32 +200,18 @@
                 <th>Payment ID</th>
                 <th>Customer ID</th>
                 <th>Payment Type</th>
-                <th>Actions</th>
             </tr>
+            {{#each payments}}
             <tr>
-                <td>INV-001
+                <td>{{this.invoiceId}}
                 </td>
-                <td>PAY-101</td>
+                <td>{{this._id}}</td>
                 <td>
-                    <a href="/customers/customer/CUST-01">CUST-01</a>
+                    <a href="/customers/customer/{{this.customerId}}">{{this.customerId}}</a>
                 </td>
-                <td>Online</td>
-                <td><a href="/payments/update-payment/PAY-101" class="edit-btn">Edit</a></td>
+                <td>{{this.paymentMethod}}</td>
             </tr>
-            <tr>
-                <td>INV-002</td>
-                <td>PAY-102</td>
-                <td>CUST-02</td>
-                <td>Bank Transfer</td>
-                <td><a href="/edit-payment/PAY-102" class="edit-btn">Edit</a></td>
-            </tr>
-            <tr>
-                <td>INV-003</td>
-                <td>PAY-103</td>
-                <td>CUST-03</td>
-                <td>Offline</td>
-                <td><a href="/edit-payment/PAY-103" class="edit-btn">Edit</a></td>
-            </tr>
+            {{/each}}
         </table>
     </div>
 

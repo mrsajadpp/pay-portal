@@ -10,6 +10,11 @@ const paymentSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    customerId: {
+        type: String, // Assuming customerId refers to a customer document
+        required: true,
+        ref: 'Customer', // Reference to the Customer model
+    },
     paymentMethod: {
         type: String,
         enum: ['bank-transfer', 'offline', 'online'], // Enum for payment methods
@@ -23,10 +28,6 @@ const paymentSchema = new mongoose.Schema({
         type: String,
         enum: ['Pending', 'Completed', 'Failed'], // Status options for the payment
         default: 'Completed',
-    },
-    notes: {
-        type: String,
-        trim: true,
     },
 }, {
     timestamps: true, // Adds createdAt and updatedAt timestamps

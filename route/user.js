@@ -13,6 +13,9 @@ const Project = require("../data/model/project/model");
 const ProjectBin = require("../data/model/project/bin");
 
 const Invoice = require("../data/model/invoice/model");
+const InvoiceBin = require("../data/model/invoice/bin");
+
+const Payment = require("../data/model/payment/model");
 
 const { default: mongoose } = require('mongoose');
 
@@ -485,9 +488,10 @@ router.post("/invoicing/search", verify, async (req, res, next) => {
 });
 
 // Payments page
-router.get("/payments", verify, (req, res, next) => {
+router.get("/payments", verify, async (req, res, next) => {
     try {
-        res.render("payments", { title: "Payments Management" });
+        let payments = await Payment.find().sort({ _id: -1 }).lean();
+        res.render("payments", { title: "Payments Management", payments });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
@@ -497,6 +501,45 @@ router.get("/payments", verify, (req, res, next) => {
 router.get("/payments/create-payment", verify, (req, res, next) => {
     try {
         res.render("payments/create-payment", { title: "Create Payment" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/payments/create-payment", verify, async (req, res, next) => {
+    try {
+        const { invoiceId, paymentMethod } = req.body;
+
+        if (!invoiceId) return res.render("payments/create-payment", { title: "Create Invoice", invoice: req.body, error: "invoiceId is required" });
+        if (!paymentMethod) return res.render("payments/create-payment", { title: "Create Invoice", invoice: req.body, error: "payment Method is required" });
+
+        let invoice = await Invoice.findOne({ _id: new mongoose.Types.ObjectId(invoiceId) }).lean();
+
+        if (!invoice) return res.render("payments/create-payment", { title: "Create Invoice", invoice: req.body, error: "invoice is not exist" });
+
+        let project = await Project.findOne({ _id: new mongoose.Types.ObjectId(invoice.projectId) }).lean();
+
+        if (!project) return res.render("payments/create-payment", { title: "Create Invoice", invoice: req.body, error: "projectId is not exist" });
+
+        req.body.paymentDate = new Date();
+        req.body.amount = project.projectAmount;
+        req.body.customerId = invoice.customerId;
+
+        let payment = new Payment(req.body);
+        await payment.save();
+
+        let projectDel = new ProjectBin(project);
+        await projectDel.save();
+
+        await Project.deleteOne({ _id: new mongoose.Types.ObjectId(invoice.projectId) });
+
+        let invoiceDel = new InvoiceBin(invoice);
+        await invoiceDel.save();
+
+        await Invoice.deleteOne({ _id: new mongoose.Types.ObjectId(invoice._id) });
+
+        return res.redirect("/payments");
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");

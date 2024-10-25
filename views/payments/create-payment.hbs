@@ -131,14 +131,14 @@
         <h2>Make Payment</h2>
 
         <!-- Payment Form -->
-        <form action="/submit-payment" method="POST" class="payment-form">
+        <form action="/payments/create-payment" method="POST" class="payment-form">
             <!-- Invoice ID -->
             <label for="invoice-id">Invoice ID</label>
-            <input type="text" id="invoice-id" name="invoice-id" placeholder="Enter Invoice ID" required>
+            <input type="text" id="invoice-id" name="invoiceId" placeholder="Enter Invoice ID" required>
 
             <!-- Payment Method -->
             <label for="payment-method">Payment Method</label>
-            <select id="payment-method" name="payment-method" required>
+            <select id="payment-method" name="paymentMethod" required>
                 <option value="">Select Payment Method</option>
                 <option value="bank-transfer">Bank Transfer</option>
                 <option value="offline">Offline</option>

@@ -24,10 +24,6 @@ const paymentSchema = new mongoose.Schema({
         enum: ['Pending', 'Completed', 'Failed'], // Status options for the payment
         default: 'Completed',
     },
-    notes: {
-        type: String,
-        trim: true,
-    },
 }, {
     timestamps: true, // Adds createdAt and updatedAt timestamps
 });

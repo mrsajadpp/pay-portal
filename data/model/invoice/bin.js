@@ -7,7 +7,7 @@ const invoiceSchema = new mongoose.Schema({
         ref: 'Project', // Reference to the Project model
     },
     customerId: {
-        type: mongoose.Schema.Types.ObjectId, // Assuming customerId refers to a customer document
+        type: String, // Assuming customerId refers to a customer document
         required: true,
         ref: 'Customer', // Reference to the Customer model
     },
