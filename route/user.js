@@ -283,9 +283,6 @@ router.post("/customers/search", verify, async (req, res, next) => {
             ],
         }).sort({ _id: -1 }).lean();
 
-        console.log(filtered);
-        
-
 
         return res.render("customers", { title: "Customer Management", customers: filtered, query });
     } catch (error) {
