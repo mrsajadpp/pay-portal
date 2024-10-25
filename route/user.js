@@ -411,7 +411,7 @@ router.post("/invoicing/create-invoice", verify, async (req, res, next) => {
 
         let project = await Project.findOne({ _id: new mongoose.Types.ObjectId(projectId) }).lean();
 
-        if(!project) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "projectId is not exist" });
+        if (!project) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "projectId is not exist" });
 
         req.body.invoiceDate = new Date();
         req.body.amount = project.projectAmount;
@@ -449,12 +449,35 @@ router.post("/invoicing/update-invoice", verify, async (req, res, next) => {
 
         let project = await Project.findOne({ _id: new mongoose.Types.ObjectId(projectId) }).lean();
 
-        if(!project) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "projectId is not exist" });
+        if (!project) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "projectId is not exist" });
         req.body.invoiceDate = new Date();
         req.body.amount = project.projectAmount;
         let invoice = await Invoice.updateOne({ projectId: projectId }, req.body);
 
         return res.redirect("/invoicing");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/invoicing/search", verify, async (req, res, next) => {
+    try {
+        const { query } = req.body;
+
+        let invoices = await Invoice.find().sort({ _id: -1 }).lean();
+        if (!query) return res.render("invoicing", { title: "Invoicing", invoices });
+
+        const regex = new RegExp(query, 'i');
+
+        // Filter employees based on the query
+        let filtered = await Invoice.find({
+            $or: [
+                { customerId: { $regex: regex } },
+                { amount: { $regex: regex } },
+            ],
+        }).sort({ _id: -1 }).lean();
+        res.render("invoicing", { title: "Invoicing", invoices: filtered, query });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");

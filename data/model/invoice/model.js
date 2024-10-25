@@ -12,7 +12,7 @@ const invoiceSchema = new mongoose.Schema({
         ref: 'Customer', // Reference to the Customer model
     },
     amount: {
-        type: Number,
+        type: String,
         required: true,
     },
     invoiceDate: {
@@ -30,7 +30,7 @@ const invoiceSchema = new mongoose.Schema({
     },
     notes: {
         type: String,
-        trim: true,
+        trim: true, 
     },
 }, {
     timestamps: true, // Adds createdAt and updatedAt timestamps
