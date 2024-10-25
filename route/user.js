@@ -164,8 +164,6 @@ router.post("/hr/search", verify, async (req, res, next) => {
             ],
         }).sort({ _id: -1 }).lean();
 
-        console.log(filtered);
-
 
         return res.render("hr", { title: "HR Portal Dashboard", employees: filtered, query });
     } catch (error) {
