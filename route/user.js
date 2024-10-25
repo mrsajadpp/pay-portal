@@ -303,7 +303,7 @@ router.get("/projects", verify, async (req, res, next) => {
         let projects = await Project.find().sort({ _id: -1 }).lean();
         res.render("projects", { title: "Projects Dashboard", projects });
     } catch (error) {
-        console.error(error); 
+        console.error(error);
         res.status(500).send("Internal server issue(500)!");
     }
 });
@@ -343,6 +343,32 @@ router.get("/projects/project/:projectId", verify, async (req, res, next) => {
         if (!req.params.projectId) return res.send("Project Id is required");
         let project = await Project.findOne({ _id: new mongoose.Types.ObjectId(req.params.projectId) }).lean();
         res.render("projects/project", { title: "Start New Project", project });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/projects/search", verify, async (req, res, next) => {
+    try {
+        const { query } = req.body;
+
+        let projects = await Project.find().sort({ _id: -1 }).lean();
+        if (!query) return res.render("projects", { title: "Projects Management", projects });
+
+        const regex = new RegExp(query, 'i');
+
+        // Filter employees based on the query
+        let filtered = await Project.find({
+            $or: [
+                { projectAmount: { $regex: regex } },
+                { projectDescription: { $regex: regex } },
+                { projectRequirements: { $regex: regex } },
+            ],
+        }).sort({ _id: -1 }).lean();
+
+ 
+        return res.render("projects", { title: "Project Management", projects: filtered, query });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");

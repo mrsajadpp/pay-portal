@@ -159,10 +159,11 @@
         <h2>Project List</h2>
 
         <!-- Search Bar and Start Project Button -->
-        <div class="search-bar">
-            <input type="text" placeholder="Search for projects...">
-            <button class="start-project-btn"><a href="/projects/start" style="color: #ffff;">Start Project</a></button>
-        </div>
+        <form class="search-bar" action="/projects/search" method="post">
+            <input type="text" name="query" value="{{query}}" placeholder="Search for projects...">
+            <button class="start-project-btn" type="button"><a href="/projects/start" style="color: #ffff;">Start
+                    Project</a></button>
+        </form>
 
         <!-- Project List -->
         <div class="project-list">
@@ -170,7 +171,8 @@
             {{#each projects}}
             <div class="project-item">
                 <div class="project-details">
-                    <p><strong>Project Name:</strong> <a href="/projects/project/{{this._id}}">{{this.projectName}}</a></p>
+                    <p><strong>Project Name:</strong> <a href="/projects/project/{{this._id}}">{{this.projectName}}</a>
+                    </p>
                     <p><strong>Customer Id:</strong> <a
                             href="/customers/customer/{{this.customerId}}">{{this.customerId}}</a></p>
                     <p><strong>Days Since Start:</strong> {{this.createdAt}}</p>

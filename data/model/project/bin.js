@@ -22,12 +22,12 @@ const projectSchema = new mongoose.Schema({
         trim: true,
     },
     projectAmount: {
-        type: Number,
+        type: String,
         required: true,
         min: 250, // Ensures that the amount is non-negative
     },
     maxDuration: {
-        type: Number,
+        type: String,
         required: true,
         min: 1, // Ensures that duration is at least 1 day
     },
