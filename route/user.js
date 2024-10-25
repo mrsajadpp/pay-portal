@@ -11,6 +11,7 @@ const Customer = require("../data/model/customer/model");
 
 const Project = require("../data/model/project/model");
 const ProjectBin = require("../data/model/project/bin");
+const { default: mongoose } = require('mongoose');
 
 // Middleware
 const verify = async (req, res, next) => {
@@ -337,9 +338,11 @@ router.post("/projects/start-project", verify, async (req, res, next) => {
     }
 });
 
-router.get("/projects/project/:projectId", verify, (req, res, next) => {
+router.get("/projects/project/:projectId", verify, async (req, res, next) => {
     try {
-        res.render("projects/project", { title: "Start New Project" });
+        if (!req.params.projectId) return res.send("Project Id is required");
+        let project = await Project.findOne({ _id: new mongoose.Types.ObjectId(req.params.projectId) }).lean();
+        res.render("projects/project", { title: "Start New Project", project });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");

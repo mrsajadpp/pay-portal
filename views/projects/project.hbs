@@ -125,15 +125,14 @@
 
         <!-- Project Information -->
         <div class="project-info">
-            <p><strong>Project ID:</strong> 101</p>
-            <p><strong>Project Name:</strong> New Web Development Project</p>
-            <p><strong>Description:</strong> Development of a responsive website with backend integration for managing
-                HR data.</p>
-            <p><strong>Project Requirements:</strong> HTML, CSS, JavaScript, Node.js, MongoDB</p>
-            <p><strong>Customer ID:</strong> 001</p>
-            <p><strong>Project Amount:</strong> ₹50,000</p>
-            <p><strong>Maximum Duration:</strong> 6 months</p>
-            <p><strong>Days Since Start:</strong> 45 days</p>
+            <p><strong>Project ID:</strong> {{project._id}}</p>
+            <p><strong>Project Name:</strong> {{project.projectName}}</p>
+            <p><strong>Description:</strong> {{project.projectDescription}}</p>
+            <p><strong>Project Requirements:</strong> {{project.projectRequirements}}</p>
+            <p><strong>Customer ID:</strong> {{project.customerId}}</p>
+            <p><strong>Project Amount:</strong> ₹{{project.projectAmount}}</p>
+            <p><strong>Maximum Duration:</strong> {{project.maximumDuration}}</p>
+            <p><strong>Days Since Start:</strong> {{project.createdAt}}</p>
         </div>
 
         <!-- Back Button -->
