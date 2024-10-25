@@ -9,6 +9,9 @@ const EmployeeBin = require("../data/model/employee/bin");
 
 const Customer = require("../data/model/customer/model");
 
+const Project = require("../data/model/project/model");
+const ProjectBin = require("../data/model/project/bin");
+
 // Middleware
 const verify = async (req, res, next) => {
     const { token } = req.session;
@@ -294,11 +297,12 @@ router.post("/customers/search", verify, async (req, res, next) => {
 });
 
 // Projects page
-router.get("/projects", verify, (req, res, next) => {
+router.get("/projects", verify, async (req, res, next) => {
     try {
-        res.render("projects", { title: "Projects Dashboard" });
+        let projects = await Project.find().sort({ _id: -1 }).lean();
+        res.render("projects", { title: "Projects Dashboard", projects });
     } catch (error) {
-        console.error(error);
+        console.error(error); 
         res.status(500).send("Internal server issue(500)!");
     }
 });

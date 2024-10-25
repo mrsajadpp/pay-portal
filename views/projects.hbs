@@ -151,7 +151,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -167,17 +167,20 @@
         <!-- Project List -->
         <div class="project-list">
             <!-- Example of a project item -->
+            {{#each projects}}
             <div class="project-item">
                 <div class="project-details">
-                    <p><strong>Project Name:</strong> <a href="/projects/project/dew">Website Development</a></p>
-                    <p><strong>Customer Name:</strong> <a href="/customers/customer/fwe">Acme Corp</a></p>
-                    <p><strong>Days Since Start:</strong> 45 days</p>
-                    <p><strong>Project Amount:</strong> $5000</p>
-                    <p><strong>Project Duration:</strong> 60 days (max)</p>
+                    <p><strong>Project Name:</strong> <a href="/projects/project/{{this._id}}">{{this.projectName}}</a></p>
+                    <p><strong>Customer Id:</strong> <a
+                            href="/customers/customer/{{this.customerId}}">{{this.customerId}}</a></p>
+                    <p><strong>Days Since Start:</strong> {{this.createdAt}}</p>
+                    <p><strong>Project Amount:</strong> ₹{{this.projectAmount}}</p>
+                    <p><strong>Project Duration:</strong> {{this.maxDuration}} (max)</p>
                 </div>
-                <button class="close-project-btn"><a href="/projects/close/dec" style="color: #ffff;">Close
+                <button class="close-project-btn"><a href="/projects/close/{{this._id}}" style="color: #ffff;">Close
                         Project</a></button>
             </div>
+            {{/each}}
 
             <!-- Add more project items here as needed -->
         </div>
