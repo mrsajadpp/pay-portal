@@ -136,8 +136,38 @@ router.get("/hr/employee/:employeeId", verify, async (req, res, next) => {
     try {
         if (!req.params.employeeId) return res.send("Employee Id is required");
         let employee = await Employee.findOne({ employeeId: req.params.employeeId }).lean();
-        
+
         res.render("hr/employee", { title: "Employee Details", employee });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/hr/search", verify, async (req, res, next) => {
+    try {
+        const { query } = req.body;
+
+        let employees = await Employee.find().sort({ _id: -1 }).lean();
+        if (!query) return res.render("hr", { title: "HR Management", employees });
+
+        const regex = new RegExp(query, 'i');
+
+        // Filter employees based on the query
+        let filtered = await Employee.find({
+            $or: [
+                { firstName: { $regex: regex } },
+                { lastName: { $regex: regex } },
+                { email: { $regex: regex } },
+                { position: { $regex: regex } },
+                { department: { $regex: regex } },
+            ],
+        }).sort({ _id: -1 }).lean();
+
+        console.log(filtered);
+
+
+        return res.render("hr", { title: "HR Portal Dashboard", employees: filtered, query });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
