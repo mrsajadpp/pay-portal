@@ -165,7 +165,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -196,42 +196,23 @@
             </thead>
             <tbody>
                 <!-- Sample Invoice Entry -->
+                {{#each invoices}}
                 <tr>
-                    <td>INV-001</td>
+                    <td>{{this._id}}</td>
                     <td>
-                        <a href="/customers/customer/001">001</a>
+                        <a href="/customers/customer/{{this.customerId}}">{{this.customerId}}</a>
                     </td>
                     <td>
-                        <a href="/projects/project/001">101</a>
-                    </td>
-                    <td>₹50,000</td>
+                        <a href="/projects/project/{{this.projectId}}">{{this.projectId}}</a>
+                    </td> 
+                    <td>₹{{this.amount}}</td>
                     <td class="action-buttons">
                         <button class="edit-btn">
-                            <a href="/invoicing/edit-invoice" style="color: #ffff;">Edit</a>
-                        </button>
-                        <button class="delete-btn">
-                            <a href="/invoicing/delete-invoice" style="color: #ffff;">Delete</a>
+                            <a href="/invoicing/edit-invoice/{{this._id}}" style="color: #ffff;">Edit</a>
                         </button>
                     </td>
                 </tr>
-                <tr>
-                    <td>INV-002</td>
-                    <td>
-                        <a href="/customers/customer/002">002</a>
-                    </td>
-                    <td>
-                        <a href="/projects/project/001">102</a>
-                    </td>
-                    <td>₹75,000</td>
-                    <td class="action-buttons">
-                        <button class="edit-btn">
-                            <a href="/invoicing/edit-invoice" style="color: #ffff;">Edit</a>
-                        </button>
-                        <button class="delete-btn">
-                            <a href="/invoicing/delete-invoice" style="color: #ffff;">Delete</a>
-                        </button>
-                    </td>
-                </tr>
+                {{/each}}
                 <!-- Additional Invoice Entries Here -->
             </tbody>
         </table>

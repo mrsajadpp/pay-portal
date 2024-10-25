@@ -82,13 +82,15 @@
             margin-bottom: 5px;
         }
 
-        .invoice-form input[type="text"] {
+        .invoice-form input[type="text"],
+        .invoice-form input[type="date"] {
             width: 100%;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
             margin-bottom: 15px;
+            transition: border-color 0.3s;
         }
 
         .create-invoice-btn {
@@ -143,7 +145,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -151,12 +153,18 @@
         <h2>Create Invoice</h2>
 
         <!-- Invoice Form -->
-        <form class="invoice-form">
+        <form class="invoice-form" action="/invoicing/create-invoice" method="post">
             <label for="project-id">Project ID</label>
-            <input type="text" id="project-id" name="project-id" required>
+            <input type="text" id="project-id" name="projectId" value="{{invoice.projectId}}" required>
 
             <label for="customer-id">Customer ID</label>
-            <input type="text" id="customer-id" name="customer-id" required>
+            <input type="text" id="customer-id" name="customerId" value="{{invoice.customerId}}" required>
+
+            <label for="notes">Notes</label>
+            <input type="text" id="notes" name="notes" value="{{invoice.notes}}" required>
+
+            <label for="dueDate">Notes</label>
+            <input type="date" id="dueDate" name="dueDate" value="{{invoice.dueDate}}" required>
 
             <!-- Create Invoice Button -->
             <button type="submit" class="create-invoice-btn">Create Invoice</button>
