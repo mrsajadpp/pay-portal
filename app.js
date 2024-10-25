@@ -14,9 +14,9 @@ let favicon = require("serve-favicon");
 const cors = require('cors');
 const compression = require("compression");
 const mongoose = require("./data/config");
+const PORT = process.env.PORT || 3000;
 
 var app = express();
-
 
 var hbs = handlebars.create({});
 
@@ -96,4 +96,6 @@ app.use(function (err, req, res, next) {
     res.render('error', { title: err.status, iserror: true, description: "Don't worry, check out our latest arrivals or explore our collection by category.", status: err.status, message: err.status == 404 ? "Sorry but the page you are looking for does not exist, have been removed, name changed, or is temporarily unavailable." : "Something went wrong on our end. Please try again later. Our team has been notified and is working to fix the issue. Thank you for your patience." });
 });
 
-module.exports = app;
+app.listen(PORT, () => {
+    console.log(`🚀 Listening at http://127.0.0.1:${PORT}/`);
+});
