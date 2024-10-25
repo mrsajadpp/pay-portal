@@ -20,6 +20,7 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+        ref: 'Customer', 
     },
     projectAmount: {
         type: Number,
