@@ -77,6 +77,8 @@ router.post("/hr/add-employee", verify, async (req, res, next) => {
         if (!employeeId) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Employee Id is required" });
 
         req.body.address = { country, state, city, pinCode };
+        req.body.firstName = firstName.toUpperCase();
+        req.body.lastName = lastName.toUpperCase();
         let employee = new Employee(req.body);
         await employee.save();
 
