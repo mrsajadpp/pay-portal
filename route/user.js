@@ -36,7 +36,7 @@ router.get("/", verify, (req, res, next) => {
 router.get("/hr", verify, async (req, res, next) => {
     try {
         let employees = await Employee.find().sort({ _id: -1 }).lean();
-        
+
         res.render("hr", { title: "HR Portal Dashboard", employees });
     } catch (error) {
         console.error(error);
@@ -83,9 +83,23 @@ router.post("/hr/add-employee", verify, async (req, res, next) => {
 
 router.get("/hr/update-employee/:employeeId", verify, async (req, res, next) => {
     try {
-        if(!req.params.employeeId) return res.send("Employee Id is required");
+        if (!req.params.employeeId) return res.send("Employee Id is required");
         let employee = await Employee.findOne({ employeeId: req.params.employeeId }).lean();
         res.render("hr/update-employee", { title: "Update Employee", employee });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/hr/del-employee/:employeeId", verify, async (req, res, next) => {
+    try {
+        if (!req.params.employeeId) return res.send("Employee Id is required");
+        let employee = await Employee.findOne({ employeeId: req.params.employeeId }).lean();
+        let newEmp = new EmployeeBin(employee);
+        await newEmp.save();
+        await Employee.deleteOne({ employeeId: employee.employeeId });
+        res.redirect("/hr");
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
