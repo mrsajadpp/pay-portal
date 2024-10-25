@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const secretKey = process.env.SECRET_KEY;
 const router = express.Router();
+const mail = require("../email/config");
 
 // Database Model
 const Employee = require("../data/model/employee/model");
@@ -88,6 +89,8 @@ router.post("/hr/add-employee", verify, async (req, res, next) => {
         let employee = new Employee(req.body);
         await employee.save();
 
+        mail.newEmployee(`${firstName} ${lastName}`, email);
+
         return res.redirect("/hr");
     } catch (error) {
         console.error(error);
@@ -139,6 +142,8 @@ router.post("/hr/update-employee", verify, async (req, res, next) => {
 
         req.body.address = { country, state, city, pinCode };
         let employee = await Employee.updateOne({ employeeId: employeeId }, req.body);
+
+        mail.dataUpdated(`${firstName} ${lastName}`, email);
         return res.redirect("/hr");
     } catch (error) {
         console.error(error);
@@ -225,6 +230,7 @@ router.post("/customers/add-customer", verify, async (req, res, next) => {
         let customer = new Customer(req.body);
         await customer.save();
 
+        mail.newCustomer(`${firstName} ${lastName}`, email);
         return res.redirect("/customers");
     } catch (error) {
         console.error(error);
@@ -271,6 +277,7 @@ router.post("/customers/update-customer", verify, async (req, res, next) => {
         req.body.address = { country, state, city, pinCode };
         let customer = await Customer.updateOne({ customerId: customerId }, req.body);
 
+        mail.dataUpdated(`${firstName} ${lastName}`, email);
         return res.redirect("/customers");
     } catch (error) {
         console.error(error);

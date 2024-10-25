@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const secretKey = process.env.SECRET_KEY;
 const router = express.Router();
+const mail = require("../email/config");
 
 // Middleware
 const notLogged = async (req, res, next) => {
