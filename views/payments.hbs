@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments - Grovix Lab HR Management</title>
+    <style>
+        /* Reset and basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 16px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: #0078e8;
+        }
+
+        /* Main Content Styling */
+        .content {
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #005bb5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Search and Make Payment Row */
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .search-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-container button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #0078e8;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .search-container button:hover {
+            background-color: #005bb5;
+        }
+
+        .make-payment-btn {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            margin-left: 10px;
+        }
+
+        .make-payment-btn:hover {
+            background-color: #005bb5;
+        }
+
+        /* Payment List Table */
+        .payment-list {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .payment-list th,
+        .payment-list td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .payment-list th {
+            background-color: #0078e8;
+            color: #fff;
+        }
+
+        .payment-list tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Edit Button Styling */
+        .edit-btn {
+            background-color: #ffa500;
+            color: #fff;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .edit-btn:hover {
+            background-color: #e69500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Grovix Lab Official Portal</h1>
+        <p>Payments Management - Payments</p>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/hr">HR</a>
+        <a href="/customers">Customers</a>
+        <a href="/projects">Projects</a>
+        <a href="/invoicing">Invoicing</a>
+        <a href="/payments">Payments</a>
+        <a href="/support">Support</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Payments</h2>
+
+        <!-- Search and Make Payment Row -->
+        <div class="action-row">
+            <div class="search-container">
+                <input type="text" placeholder="Search by Payment ID, Invoice ID, or Customer ID">
+            </div>
+            <a href="/payments/create-payment" class="make-payment-btn">Make Payment</a>
+        </div>
+
+        <!-- Payment List -->
+        <table class="payment-list">
+            <tr>
+                <th>Invoice ID</th>
+                <th>Payment ID</th>
+                <th>Customer ID</th>
+                <th>Payment Type</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td>INV-001
+                </td>
+                <td>PAY-101</td>
+                <td>
+                    <a href="/customers/customer/CUST-01">CUST-01</a>
+                </td>
+                <td>Online</td>
+                <td><a href="/payments/update-payment/PAY-101" class="edit-btn">Edit</a></td>
+            </tr>
+            <tr>
+                <td>INV-002</td>
+                <td>PAY-102</td>
+                <td>CUST-02</td>
+                <td>Bank Transfer</td>
+                <td><a href="/edit-payment/PAY-102" class="edit-btn">Edit</a></td>
+            </tr>
+            <tr>
+                <td>INV-003</td>
+                <td>PAY-103</td>
+                <td>CUST-03</td>
+                <td>Offline</td>
+                <td><a href="/edit-payment/PAY-103" class="edit-btn">Edit</a></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

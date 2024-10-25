@@ -158,4 +158,32 @@ router.get("/invoicing/edit-invoice", verify, (req, res, next) => {
     }
 });
 
+// Payments page
+router.get("/payments", verify, (req, res, next) => {
+    try {
+        res.render("payments", { title: "Payments Management" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/payments/create-payment", verify, (req, res, next) => {
+    try {
+        res.render("payments/create-payment", { title: "Create Payment" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/payments/update-payment/:paymentId", verify, (req, res, next) => {
+    try {
+        res.render("payments/update-payment", { title: "Create Payment" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 module.exports = router;
