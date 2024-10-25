@@ -20,7 +20,22 @@ const verify = async (req, res, next) => {
 
 // Home page
 router.get("/", verify, (req, res, next) => {
-    res.send("hi")
+    try {
+        res.render("index", { title: "Portal Dashboard" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+// Human Resource page
+router.get("/hr", verify, (req, res, next) => {
+    try {
+        res.render("hr", { title: "HR Portal Dashboard" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
 });
 
 module.exports = router;
