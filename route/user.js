@@ -179,7 +179,7 @@ router.get("/payments/create-payment", verify, (req, res, next) => {
 
 router.get("/payments/update-payment/:paymentId", verify, (req, res, next) => {
     try {
-        res.render("payments/update-payment", { title: "Create Payment" });
+        res.render("payments/update-payment", { title: "Update Payment" });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
