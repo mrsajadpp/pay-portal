@@ -7,14 +7,14 @@ const router = express.Router();
 const verify = async (req, res, next) => {
     const { token } = req.session;
     const { USER_NAME, PASS_WORD } = process.env;
-    if (!token) return res.status(401).json({ error: 'Access denied' });
+    if (!token) return res.redirect("/auth/login");
     try {
         const decoded = jwt.verify(token, secretKey);
-        if (decoded.username != USER_NAME) return res.status(401).json({ error: 'Access denied' });
-        if (decoded.password != PASS_WORD) return res.status(401).json({ error: 'Access denied' });
+        if (decoded.username != USER_NAME) return res.redirect("/auth/login");
+        if (decoded.password != PASS_WORD) return res.redirect("/auth/login");
         next();
     } catch (error) {
-        res.status(401).json({ error: 'Invalid token' });
+        return res.redirect("/auth/login");
     }
 }
 
