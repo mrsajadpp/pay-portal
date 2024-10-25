@@ -92,6 +92,32 @@ router.get("/hr/update-employee/:employeeId", verify, async (req, res, next) => 
     }
 });
 
+router.post("/hr/update-employee", verify, async (req, res, next) => {
+    try {
+        const { firstName, lastName, email, phone, country, state, city, pinCode, experience, position, department, employeeId } = req.body;
+
+        if (!firstName) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "FirstName is required" });
+        if (!lastName) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "LastName is required" });
+        if (!email) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Email is required" });
+        if (!phone) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Phone is required" });
+        if (!country) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Country is required" });
+        if (!state) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "State is required" });
+        if (!city) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "City is required" });
+        if (!pinCode) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Pin Code is required" });
+        if (!experience) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Experience is required" });
+        if (!position) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Position is required" });
+        if (!department) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Department is required" });
+        if (!employeeId) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Employee Id is required" });
+
+        req.body.address = { country, state, city, pinCode };
+        let employee = await Employee.updateOne({ employeeId: employeeId }, req.body);
+        return res.redirect("/hr");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 router.get("/hr/employee/:employeeId", verify, (req, res, next) => {
     try {
         res.render("hr/employee", { title: "Employee Details" });
