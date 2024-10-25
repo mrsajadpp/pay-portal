@@ -19,8 +19,15 @@
     "bcrypt": "^5.1.1",
     "cheerio": "^1.0.0",
     "colors": "^1.4.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.7",
+    "cookie-session": "^2.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-fileupload": "^1.5.1",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
     "fs": "^0.0.1-security",
     "geoip-lite": "^1.4.10",
     "jsonwebtoken": "^9.0.2",
@@ -32,6 +39,7 @@
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.14",
     "path": "^0.12.7",
+    "serve-favicon": "^2.5.0",
     "ua-parser-js": "^1.0.38"
   }
 }
