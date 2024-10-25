@@ -125,12 +125,11 @@
 
         <!-- Customer Information -->
         <div class="employee-info">
-            <p><strong>Customer ID:</strong> 001</p>
-            <p><strong>Full Name:</strong> John Doe</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-            <p><strong>Phone Number:</strong> +1 234 567 890</p>
-            <p><strong>Date of Joining:</strong> January 15, 2020</p>
-            <p><strong>Status:</strong> Active</p>
+            <p><strong>Customer ID:</strong> {{customer.customerIDd}}</p>
+            <p><strong>Full Name:</strong> {{customer.firstName}} {{customer.lastName}}</p>
+            <p><strong>Email:</strong> {{customer.email}}</p>
+            <p><strong>Phone Number:</strong> {{customer.phone}}</p>
+            <p><strong>Date of Joining:</strong> {{customer.createdAt}}</p>
         </div>
 
         <!-- Back Button -->

@@ -231,9 +231,11 @@ router.get("/customers/update-customer/:customerId", verify, async (req, res, ne
     }
 });
 
-router.get("/customers/customer/:customerId", verify, (req, res, next) => {
+router.get("/customers/customer/:customerId", verify, async (req, res, next) => {
     try {
-        res.render("customers/customer", { title: "Customer Details" });
+        if (!req.params.customerId) return res.send("Customer Id is required");
+        let customer = await Customer.findOne({ customerId: req.params.customerId }).lean();
+        res.render("customers/customer", { title: "Customer Details", customer });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
