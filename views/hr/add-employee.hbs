@@ -74,7 +74,8 @@
         .form-group {
             margin-bottom: 20px;
             display: flex;
-            flex-direction: column; /* Align label and input vertically */
+            flex-direction: column;
+            /* Align label and input vertically */
         }
 
         .form-group label {
@@ -93,13 +94,17 @@
         /* Flexbox for row layout */
         .form-row {
             display: flex;
-            flex-wrap: wrap; /* Allow wrapping for responsiveness */
-            gap: 20px; /* Add space between items */
+            flex-wrap: wrap;
+            /* Allow wrapping for responsiveness */
+            gap: 20px;
+            /* Add space between items */
         }
 
         .form-row .form-group {
-            flex: 1; /* Flex grow for equal width */
-            min-width: 180px; /* Minimum width to maintain layout */
+            flex: 1;
+            /* Flex grow for equal width */
+            min-width: 180px;
+            /* Minimum width to maintain layout */
         }
 
         .submit-btn {
@@ -183,6 +188,10 @@
             <div class="form-group">
                 <label for="experience">Experience (Years)</label>
                 <input type="number" id="experience" name="experience" required>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="number" id="position" name="position" required>
             </div>
             <div class="form-group">
                 <label for="department">Department</label>
