@@ -411,6 +411,8 @@ router.post("/invoicing/create-invoice", verify, async (req, res, next) => {
 
         let project = await Project.findOne({ _id: new mongoose.Types.ObjectId(projectId) }).lean();
 
+        if(!project) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "projectId is not exist" });
+
         req.body.invoiceDate = new Date();
         req.body.amount = project.projectAmount;
         let invoice = new Invoice(req.body);
@@ -423,9 +425,36 @@ router.post("/invoicing/create-invoice", verify, async (req, res, next) => {
     }
 });
 
-router.get("/invoicing/edit-invoice/:invoiceId", verify, (req, res, next) => {
+router.get("/invoicing/edit-invoice/:invoiceId", verify, async (req, res, next) => {
     try {
-        res.render("invoicing/edit-invoice", { title: "Edit Invoice" });
+        if (!req.params.invoiceId) return res.send("Invoice Id is required");
+        let invoice = await Invoice.findOne({ _id: new mongoose.Types.ObjectId(req.params.invoiceId) }).lean();
+        const dueDate = new Date(invoice.dueDate).toISOString().split('T')[0];
+
+        res.render("invoicing/edit-invoice", { title: "Edit Invoice", invoice, dueDate });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/invoicing/update-invoice", verify, async (req, res, next) => {
+    try {
+        const { projectId, customerId, notes, dueDate } = req.body;
+
+        if (!projectId) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "projectId is required" });
+        if (!customerId) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "customerId Id is required" });
+        if (!notes) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "notes Id is required" });
+        if (!dueDate) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "dueDate Id is required" });
+
+        let project = await Project.findOne({ _id: new mongoose.Types.ObjectId(projectId) }).lean();
+
+        if(!project) return res.render("invoicing/create-invoice", { title: "Create Invoice", invoice: req.body, error: "projectId is not exist" });
+        req.body.invoiceDate = new Date();
+        req.body.amount = project.projectAmount;
+        let invoice = await Invoice.updateOne({ projectId: projectId }, req.body);
+
+        return res.redirect("/invoicing");
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
