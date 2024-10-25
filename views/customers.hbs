@@ -177,7 +177,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -206,32 +206,20 @@
             </thead>
             <tbody>
                 <!-- Example Customer Row -->
+                {{#each customers}}
                 <tr>
-                    <td>001</td>
-                    <td><a href="/customers/customer/001" class="employee-link">John Doe</a></td>
-                    <td>john.doe@example.com</td>
+                    <td>{{this.customerId}}</td>
+                    <td><a href="/customers/customer/{{this.customerId}}" class="employee-link">{{this.firstName}} {{this.lastName}}</a></td>
+                    <td>{{this.email}}</td>
                     <td class="action-btns">
                         <button class="action-btn edit-btn">
-                            <a href="/customers/update-customer" style="color: #ffff;">
+                            <a href="/customers/update-customer/{{this.customerId}}" style="color: #ffff;">
                                 Edit
                             </a>
                         </button>
-                        <button class="action-btn delete-btn">Delete</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>002</td>
-                    <td><a href="/customers/customer/002" class="employee-link">Jane Smith</a></td>
-                    <td>jane.smith@example.com</td>
-                    <td class="action-btns">
-                        <button class="action-btn edit-btn">
-                            <a href="/customers/update-customer" style="color: #ffff;">
-                                Edit
-                            </a>
-                        </button>
-                        <button class="action-btn delete-btn">Delete</button>
-                    </td>
-                </tr>
+                {{/each}}
                 <!-- Add more employee rows as needed -->
             </tbody>
         </table>

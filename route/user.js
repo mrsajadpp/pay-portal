@@ -7,6 +7,8 @@ const router = express.Router();
 const Employee = require("../data/model/employee/model");
 const EmployeeBin = require("../data/model/employee/bin");
 
+const Customer = require("../data/model/customer/model");
+
 // Middleware
 const verify = async (req, res, next) => {
     const { token } = req.session;
@@ -173,9 +175,10 @@ router.post("/hr/search", verify, async (req, res, next) => {
 });
 
 // Customers page
-router.get("/customers", verify, (req, res, next) => {
+router.get("/customers", verify, async (req, res, next) => {
     try {
-        res.render("customers", { title: "Customers Dashboard" });
+        let customers = await Customer.find().sort({ _id: -1 }).lean();
+        res.render("customers", { title: "Customers Dashboard", customers });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
@@ -185,6 +188,31 @@ router.get("/customers", verify, (req, res, next) => {
 router.get("/customers/add-customer", verify, (req, res, next) => {
     try {
         res.render("customers/add-customer", { title: "Add New Customer" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/customers/add-customer", verify, async (req, res, next) => {
+    try {
+        const { firstName, lastName, email, phone, country, state, city, pinCode, customerId } = req.body;
+
+        if (!firstName) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "FirstName is required" });
+        if (!lastName) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "LastName is required" });
+        if (!email) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Email is required" });
+        if (!phone) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Phone is required" });
+        if (!country) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Country is required" });
+        if (!state) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "State is required" });
+        if (!city) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "City is required" });
+        if (!pinCode) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Pin Code is required" });
+        if (!customerId) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Employee Id is required" });
+
+        req.body.address = { country, state, city, pinCode };
+        let customer = new Customer(req.body);
+        await customer.save();
+
+        return res.redirect("/customers");
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
