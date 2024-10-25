@@ -177,7 +177,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -206,32 +206,21 @@
             </thead>
             <tbody>
                 <!-- Example Employee Row -->
+                {{#each employees}}
                 <tr>
-                    <td>001</td>
-                    <td><a href="/hr/employee/001" class="employee-link">John Doe</a></td>
-                    <td>john.doe@example.com</td>
+                    <td>{{this.employeeId}}</td>
+                    <td><a href="/hr/employee/{{this.employeeId}}" class="employee-link">{{this.firstName}} {{this.lastName}}</a></td>
+                    <td>{{this.email}}</td>
                     <td class="action-btns">
                         <button class="action-btn edit-btn">
-                            <a href="/hr/update-employee" style="color: #ffff;">
+                            <a href="/hr/update-employee/{{this.employeeId}}" style="color: #ffff;">
                                 Edit
                             </a>
                         </button>
                         <button class="action-btn delete-btn">Delete</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>002</td>
-                    <td><a href="/hr/employee/002" class="employee-link">Jane Smith</a></td>
-                    <td>jane.smith@example.com</td>
-                    <td class="action-btns">
-                        <button class="action-btn edit-btn">
-                            <a href="/hr/update-employee" style="color: #ffff;">
-                                Edit
-                            </a>
-                        </button>
-                        <button class="action-btn delete-btn">Delete</button>
-                    </td>
-                </tr>
+                {{/each}}
                 <!-- Add more employee rows as needed -->
             </tbody>
         </table>
