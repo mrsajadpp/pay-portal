@@ -219,9 +219,11 @@ router.post("/customers/add-customer", verify, async (req, res, next) => {
     }
 });
 
-router.get("/customers/update-customer", verify, (req, res, next) => {
+router.get("/customers/update-customer/:customerId", verify, async (req, res, next) => {
     try {
-        res.render("customers/update-customer", { title: "Update Customer" });
+        if (!req.params.customerId) return res.send("Customer Id is required");
+        let customer = await Customer.findOne({ customerId: req.params.customerId }).lean();
+        res.render("customers/update-customer", { title: "Update Customer", customer });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
@@ -231,6 +233,30 @@ router.get("/customers/update-customer", verify, (req, res, next) => {
 router.get("/customers/customer/:customerId", verify, (req, res, next) => {
     try {
         res.render("customers/customer", { title: "Customer Details" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/customers/update-customer", verify, async (req, res, next) => {
+    try {
+        const { firstName, lastName, email, phone, country, state, city, pinCode, customerId } = req.body;
+
+        if (!firstName) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "FirstName is required" });
+        if (!lastName) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "LastName is required" });
+        if (!email) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Email is required" });
+        if (!phone) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Phone is required" });
+        if (!country) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Country is required" });
+        if (!state) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "State is required" });
+        if (!city) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "City is required" });
+        if (!pinCode) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Pin Code is required" });
+        if (!customerId) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Employee Id is required" });
+
+        req.body.address = { country, state, city, pinCode };
+        let customer = await Customer.updateOne({ customerId: customerId }, req.body);
+
+        return res.redirect("/customers");
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");

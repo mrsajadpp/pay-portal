@@ -147,48 +147,48 @@
 
     <!-- Main Content -->
     <div class="content">
-        <h2>Update New Customer</h2>
+        <h2>Update New Customer</h2> 
 
-        <form action="/customers/add-employee" method="POST">
+        <form action="/customers/update-customer" method="POST">
             <div class="form-row">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" required>
+                    <input type="text" id="firstName" name="firstName" value="{{customer.firstName}}" required>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" required>
+                    <input type="text" id="lastName" name="lastName" value="{{customer.lastName}}" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="{{customer.email}}" required>
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" id="phone" name="phone" value="{{customer.phone}}" required>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" id="country" name="country" required>
+                    <input type="text" id="country" name="country" value="{{customer.address.country}}" required>
                 </div>
                 <div class="form-group">
                     <label for="state">State</label>
-                    <input type="text" id="state" name="state" required>
+                    <input type="text" id="state" name="state" value="{{customer.address.state}}" required>
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" id="city" name="city" required>
+                    <input type="text" id="city" name="city" value="{{customer.address.city}}" required>
                 </div>
                 <div class="form-group">
                     <label for="pinCode">Pin Code</label>
-                    <input type="text" id="pinCode" name="pinCode" required>
+                    <input type="text" id="pinCode" name="pinCode" value="{{customer.address.pinCode}}" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="employeeId">Customer ID</label>
-                <input type="text" id="employeeId" name="employeeId" required>
+                <input type="text" id="employeeId" name="customerId" value="{{customer.customerId}}" readonly required>
             </div>
             <button type="submit" class="submit-btn">Update Customer</button>
         </form>
