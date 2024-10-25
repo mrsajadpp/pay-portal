@@ -52,4 +52,15 @@ router.post("/login", notLogged, async (req, res, next) => {
     }
 });
 
+// Logout
+router.get("/logout", async (req, res, next) => {
+    try {
+        req.session.token = null;
+        res.redirect("/auth/login");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 module.exports = router;
