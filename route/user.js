@@ -132,9 +132,12 @@ router.post("/hr/update-employee", verify, async (req, res, next) => {
     }
 });
 
-router.get("/hr/employee/:employeeId", verify, (req, res, next) => {
+router.get("/hr/employee/:employeeId", verify, async (req, res, next) => {
     try {
-        res.render("hr/employee", { title: "Employee Details" });
+        if (!req.params.employeeId) return res.send("Employee Id is required");
+        let employee = await Employee.findOne({ employeeId: req.params.employeeId }).lean();
+        
+        res.render("hr/employee", { title: "Employee Details", employee });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");

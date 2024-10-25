@@ -116,7 +116,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -125,14 +125,13 @@
 
         <!-- Employee Information -->
         <div class="employee-info">
-            <p><strong>Employee ID:</strong> 001</p>
-            <p><strong>Full Name:</strong> John Doe</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-            <p><strong>Phone Number:</strong> +1 234 567 890</p>
-            <p><strong>Position:</strong> Software Developer</p>
-            <p><strong>Department:</strong> IT</p>
-            <p><strong>Date of Joining:</strong> January 15, 2020</p>
-            <p><strong>Status:</strong> Active</p>
+            <p><strong>Employee ID:</strong> {{employee.employeeId}}</p>
+            <p><strong>Full Name:</strong> {{employee.firstName}} {{employee.lastName}}</p>
+            <p><strong>Email:</strong> {{employee.email}}</p>
+            <p><strong>Phone Number:</strong> {{employee.phone}}</p>
+            <p><strong>Position:</strong> {{employee.position}}</p>
+            <p><strong>Department:</strong> {{employee.department}}</p>
+            <p><strong>Date of Joining:</strong> {{employee.createdAt}}</p>
         </div>
 
         <!-- Back Button -->
