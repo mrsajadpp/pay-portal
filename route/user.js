@@ -102,4 +102,32 @@ router.get("/customers/customer/:customerId", verify, (req, res, next) => {
     }
 });
 
+// Projects page
+router.get("/projects", verify, (req, res, next) => {
+    try {
+        res.render("projects", { title: "Projects Dashboard" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/projects/start", verify, (req, res, next) => {
+    try {
+        res.render("projects/start", { title: "Start New Project" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/projects/project/:projectId", verify, (req, res, next) => {
+    try {
+        res.render("projects/project", { title: "Start New Project" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 module.exports = router;

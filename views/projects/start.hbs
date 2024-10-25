@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start New Project - Grovix Lab Project Management</title>
+    <style>
+        /* Reset and basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 16px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: #0078e8;
+        }
+
+        /* Main Content Styling */
+        .content {
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #005bb5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .submit-btn {
+            background-color: #0078e8;
+            color: #fff;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        .submit-btn:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Grovix Lab Official Portal</h1>
+        <p>Project Management - Start New Project</p>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/hr">HR</a>
+        <a href="/customers">Customers</a>
+        <a href="/projects">Projects</a>
+        <a href="/invoicing">Invoicing</a>
+        <a href="/payments">Payments</a>
+        <a href="/support">Support</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Start New Project</h2>
+
+        <form action="/projects/start-project" method="POST">
+            <div class="form-group">
+                <label for="projectName">Project Name</label>
+                <input type="text" id="projectName" name="projectName" required>
+            </div>
+            <div class="form-group">
+                <label for="projectDescription">Project Description</label>
+                <textarea id="projectDescription" name="projectDescription" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="projectRequirements">Project Requirements</label>
+                <textarea id="projectRequirements" name="projectRequirements" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="customerId">Customer ID</label>
+                <input type="text" id="customerId" name="customerId" required>
+            </div>
+            <div class="form-group">
+                <label for="projectAmount">Project Amount (₹)</label>
+                <input type="number" id="projectAmount" name="projectAmount" required>
+            </div>
+            <div class="form-group">
+                <label for="maxDuration">Maximum Duration (days)</label>
+                <input type="number" id="maxDuration" name="maxDuration" required>
+            </div>
+            <button type="submit" class="submit-btn">Start Project</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

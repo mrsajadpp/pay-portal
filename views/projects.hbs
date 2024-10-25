@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Grovix Lab</title>
+    <style>
+        /* Basic Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: #0078e8;
+        }
+
+        /* Main content styling */
+        .content {
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #005bb5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Search and Button */
+        .search-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 75%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .start-project-btn {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .start-project-btn:hover {
+            background-color: #005bb5;
+        }
+
+        /* Project List */
+        .project-list {
+            margin-top: 20px;
+        }
+
+        .project-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-details {
+            flex: 1;
+        }
+
+        .project-details p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .close-project-btn {
+            background-color: #ff4c4c;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .close-project-btn:hover {
+            background-color: #d93333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Grovix Lab Official Portal</h1>
+        <p>Project Management - Project List</p>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/hr">HR</a>
+        <a href="/customers">Customers</a>
+        <a href="/projects">Projects</a>
+        <a href="/invoicing">Invoicing</a>
+        <a href="/payments">Payments</a>
+        <a href="/support">Support</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Project List</h2>
+
+        <!-- Search Bar and Start Project Button -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search for projects...">
+            <button class="start-project-btn"><a href="/projects/start" style="color: #ffff;">Start Project</a></button>
+        </div>
+
+        <!-- Project List -->
+        <div class="project-list">
+            <!-- Example of a project item -->
+            <div class="project-item">
+                <div class="project-details">
+                    <p><strong>Project Name:</strong> <a href="/projects/project/dew">Website Development</a></p>
+                    <p><strong>Customer Name:</strong> <a href="/customers/customer/fwe">Acme Corp</a></p>
+                    <p><strong>Days Since Start:</strong> 45 days</p>
+                    <p><strong>Project Amount:</strong> $5000</p>
+                    <p><strong>Project Duration:</strong> 60 days (max)</p>
+                </div>
+                <button class="close-project-btn"><a href="/projects/close/dec" style="color: #ffff;">Close
+                        Project</a></button>
+            </div>
+
+            <!-- Add more project items here as needed -->
+        </div>
+    </div>
+
+</body>
+
+</html>
