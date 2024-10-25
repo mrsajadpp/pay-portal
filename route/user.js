@@ -163,6 +163,7 @@ router.post("/hr/search", verify, async (req, res, next) => {
                 { email: { $regex: regex } },
                 { position: { $regex: regex } },
                 { department: { $regex: regex } },
+                { employeeId: { $regex: regex } },
             ],
         }).sort({ _id: -1 }).lean();
 
@@ -257,6 +258,36 @@ router.post("/customers/update-customer", verify, async (req, res, next) => {
         let customer = await Customer.updateOne({ customerId: customerId }, req.body);
 
         return res.redirect("/customers");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.post("/customers/search", verify, async (req, res, next) => {
+    try {
+        const { query } = req.body;
+
+        let customers = await Customer.find().sort({ _id: -1 }).lean();
+        if (!query) return res.render("customers", { title: "Customer Management", customers });
+
+        const regex = new RegExp(query, 'i');
+
+        // Filter employees based on the query
+        let filtered = await Customer.find({
+            $or: [
+                { firstName: { $regex: regex } },
+                { lastName: { $regex: regex } },
+                { email: { $regex: regex } },
+                { customerId: { $regex: regex } },
+            ],
+        }).sort({ _id: -1 }).lean();
+
+        console.log(filtered);
+        
+
+
+        return res.render("customers", { title: "Customer Management", customers: filtered, query });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server issue(500)!");
