@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Employee - Grovix Lab HR Management</title>
+    <title>Add New Customer - Grovix Lab HR Management</title>
     <style>
         /* Reset and basic styling */
         * {
@@ -131,7 +131,7 @@
     <!-- Header -->
     <div class="header">
         <h1>Grovix Lab Official Portal</h1>
-        <p>HR Management - Manage Employee Information</p>
+        <p>HR Management - Manage Customer Information</p>
     </div>
 
     <!-- Navbar -->
@@ -147,9 +147,9 @@
 
     <!-- Main Content -->
     <div class="content">
-        <h2>Update Employee</h2>
+        <h2>Add New Customer</h2>
 
-        <form action="/hr/update-employee" method="POST">
+        <form action="/customers/add-employee" method="POST">
             <div class="form-row">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
@@ -187,22 +187,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="experience">Experience (Years)</label>
-                <input type="number" id="experience" name="experience" required>
-            </div>
-            <div class="form-group">
-                <label for="position">Position</label>
-                <input type="number" id="position" name="position" required>
-            </div>
-            <div class="form-group">
-                <label for="department">Department</label>
-                <input type="text" id="department" name="department" required>
-            </div>
-            <div class="form-group">
-                <label for="employeeId">Employee ID</label>
+                <label for="employeeId">Customer ID</label>
                 <input type="text" id="employeeId" name="employeeId" required>
             </div>
-            <button type="submit" class="submit-btn">Update Employee</button>
+            <button type="submit" class="submit-btn">Add Customer</button>
         </form>
     </div>
 

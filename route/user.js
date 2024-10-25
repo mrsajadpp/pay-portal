@@ -65,4 +65,41 @@ router.get("/hr/employee/:employeeId", verify, (req, res, next) => {
     }
 });
 
+// Customers page
+router.get("/customers", verify, (req, res, next) => {
+    try {
+        res.render("customers", { title: "Customers Dashboard" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/customers/add-customer", verify, (req, res, next) => {
+    try {
+        res.render("customers/add-customer", { title: "Add New Customer" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/customers/update-customer", verify, (req, res, next) => {
+    try {
+        res.render("customers/update-customer", { title: "Update Customer" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/customers/customer/:customerId", verify, (req, res, next) => {
+    try {
+        res.render("customers/customer", { title: "Customer Details" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 module.exports = router;
