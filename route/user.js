@@ -130,4 +130,32 @@ router.get("/projects/project/:projectId", verify, (req, res, next) => {
     }
 });
 
+// Invoicing page
+router.get("/invoicing", verify, (req, res, next) => {
+    try {
+        res.render("invoicing", { title: "Invoicing" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/invoicing/create-invoice", verify, (req, res, next) => {
+    try {
+        res.render("invoicing/create-invoice", { title: "Create Invoice" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
+router.get("/invoicing/edit-invoice", verify, (req, res, next) => {
+    try {
+        res.render("invoicing/edit-invoice", { title: "Edit Invoice" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 module.exports = router;

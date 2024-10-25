@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoicing - Grovix Lab HR Management</title>
+    <style>
+        /* Reset and basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 16px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: #0078e8;
+        }
+
+        /* Main Content Styling */
+        .content {
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #005bb5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Search and Create Button */
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .search-box input[type="text"] {
+            padding: 8px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .create-btn {
+            background-color: #0078e8;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .create-btn:hover {
+            background-color: #005bb5;
+        }
+
+        /* Invoice Table */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .invoice-table th,
+        .invoice-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .invoice-table th {
+            background-color: #0078e8;
+            color: #fff;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            padding: 8px 12px;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #4caf50;
+        }
+
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+
+        .delete-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Grovix Lab Official Portal</h1>
+        <p>Projects Management - Invoicing</p>
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/hr">HR</a>
+        <a href="/customers">Customers</a>
+        <a href="/projects">Projects</a>
+        <a href="/invoicing">Invoicing</a>
+        <a href="/payments">Payments</a>
+        <a href="/support">Support</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Invoicing</h2>
+
+        <!-- Action Bar: Search and Create Button -->
+        <div class="action-bar">
+            <!-- Search Box -->
+            <div class="search-box">
+                <input type="text" placeholder="Search Invoices..." id="search-input">
+            </div>
+
+            <!-- Create New Invoice Button -->
+            <a href="/invoicing/create-invoice" class="create-btn">Create New Invoice</a>
+        </div>
+
+        <!-- Invoice Table -->
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Customer ID</th>
+                    <th>Project ID</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample Invoice Entry -->
+                <tr>
+                    <td>INV-001</td>
+                    <td>
+                        <a href="/customers/customer/001">001</a>
+                    </td>
+                    <td>
+                        <a href="/projects/project/001">101</a>
+                    </td>
+                    <td>₹50,000</td>
+                    <td class="action-buttons">
+                        <button class="edit-btn">
+                            <a href="/invoicing/edit-invoice" style="color: #ffff;">Edit</a>
+                        </button>
+                        <button class="delete-btn">
+                            <a href="/invoicing/delete-invoice" style="color: #ffff;">Delete</a>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>INV-002</td>
+                    <td>
+                        <a href="/customers/customer/002">002</a>
+                    </td>
+                    <td>
+                        <a href="/projects/project/001">102</a>
+                    </td>
+                    <td>₹75,000</td>
+                    <td class="action-buttons">
+                        <button class="edit-btn">
+                            <a href="/invoicing/edit-invoice" style="color: #ffff;">Edit</a>
+                        </button>
+                        <button class="delete-btn">
+                            <a href="/invoicing/delete-invoice" style="color: #ffff;">Delete</a>
+                        </button>
+                    </td>
+                </tr>
+                <!-- Additional Invoice Entries Here -->
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
