@@ -316,6 +316,27 @@ router.get("/projects/start", verify, (req, res, next) => {
     }
 });
 
+router.post("/projects/start-project", verify, async (req, res, next) => {
+    try {
+        const { projectName, projectDescription, projectRequirements, customerId, projectAmount, maxDuration } = req.body;
+
+        if (!projectName) return res.render("projects/start", { title: "Start New Project", project: req.body, error: "ProjectName is required" });
+        if (!projectDescription) return res.render("projects/start", { title: "Start New Project", project: req.body, error: "projectDescription is required" });
+        if (!projectRequirements) return res.render("projects/start", { title: "Start New Project", project: req.body, error: "projectRequirements is required" });
+        if (!projectAmount) return res.render("projects/start", { title: "Start New Project", project: req.body, error: "projectAmount is required" });
+        if (!maxDuration) return res.render("projects/start", { title: "Start New Project", project: req.body, error: "maxDuration is required" });
+        if (!customerId) return res.render("projects/start", { title: "Start New Project", project: req.body, error: "customerId Id is required" });
+
+        let project = new Project(req.body);
+        await project.save();
+
+        return res.redirect("/projects");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server issue(500)!");
+    }
+});
+
 router.get("/projects/project/:projectId", verify, (req, res, next) => {
     try {
         res.render("projects/project", { title: "Start New Project" });

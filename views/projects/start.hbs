@@ -137,7 +137,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -147,27 +147,29 @@
         <form action="/projects/start-project" method="POST">
             <div class="form-group">
                 <label for="projectName">Project Name</label>
-                <input type="text" id="projectName" name="projectName" required>
+                <input type="text" id="projectName" name="projectName" value="{{project.projectName}}" required>
             </div>
             <div class="form-group">
                 <label for="projectDescription">Project Description</label>
-                <textarea id="projectDescription" name="projectDescription" rows="4" required></textarea>
+                <textarea id="projectDescription" name="projectDescription" rows="4"
+                    value="{{project.projectDescription}}" required></textarea>
             </div>
             <div class="form-group">
                 <label for="projectRequirements">Project Requirements</label>
-                <textarea id="projectRequirements" name="projectRequirements" rows="3" required></textarea>
+                <textarea id="projectRequirements" name="projectRequirements" rows="3"
+                    value="{{project.projectRequirements}}" required></textarea>
             </div>
             <div class="form-group">
                 <label for="customerId">Customer ID</label>
-                <input type="text" id="customerId" name="customerId" required>
+                <input type="text" id="customerId" name="customerId" value="{{project.customerId}}" required>
             </div>
             <div class="form-group">
                 <label for="projectAmount">Project Amount (₹)</label>
-                <input type="number" id="projectAmount" name="projectAmount" required>
+                <input type="number" id="projectAmount" name="projectAmount" value="{{project.projectAmount}}" required>
             </div>
             <div class="form-group">
                 <label for="maxDuration">Maximum Duration (days)</label>
-                <input type="number" id="maxDuration" name="maxDuration" required>
+                <input type="number" id="maxDuration" name="maxDuration" value="{{project.maxDuration}}" required>
             </div>
             <button type="submit" class="submit-btn">Start Project</button>
         </form>
