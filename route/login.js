@@ -4,23 +4,17 @@ const secretKey = process.env.SECRET_KEY;
 const router = express.Router();
 
 // Middleware
-const verify = async (req, res, next) => {
-    const { token } = req.query;
-    if (!token) return res.status(401).json({ error: 'Access denied' });
+const notLogged = async (req, res, next) => {
+    const { token } = req.session;
+    if (!token) return next();
     try {
         const decoded = jwt.verify(token, secretKey);
-        if (decoded.username != process.env.USERNAME) return res.status(401).json({ error: 'Access denied' });
-        if (decoded.password != process.env.PASSWORD) return res.status(401).json({ error: 'Access denied' });
-        next();
+        if (decoded.username != process.env.USER_NAME) return next();
+        if (decoded.password != process.env.PASS_WORD) return next();
+        return res.redirect('/');
     } catch (error) {
-        res.status(401).json({ error: 'Invalid token' });
+        return next();
     }
-}
-
-const notLogged = async (req, res, next) => {
-    const { token } = req.query;
-    if (!token) return res.redirect("/");
-    next();
 }
 
 // Login page
@@ -36,11 +30,12 @@ router.get("/login", notLogged, async (req, res, next) => {
 router.post("/login", notLogged, async (req, res, next) => {
     try {
         const { username, password } = req.body;
+        const { USER_NAME, PASS_WORD } = process.env;
 
         if (!username) return res.send("Username is required!.");
         if (!password) return res.send("Password is required!.");
 
-        if (username == process.env.USERNAME && password == process.env.PASSWORD) {
+        if (username == USER_NAME && password == PASS_WORD) {
             const token = await jwt.sign(
                 {
                     username,

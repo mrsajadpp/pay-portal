@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-        
+
         body {
             display: flex;
             align-items: center;
@@ -33,7 +34,8 @@
 
         .login-container h2 {
             margin-bottom: 24px;
-            color: #0078e8; /* Grovix Lab's color */
+            color: #0078e8;
+            /* Grovix Lab's color */
         }
 
         .login-container label {
@@ -77,11 +79,12 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="login-container">
         <h2>Grovix Lab Portal Login</h2>
-        <form action="/login" method="post">
+        <form action="/auth/login" method="post">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
 
@@ -96,4 +99,5 @@
     </div>
 
 </body>
+
 </html>
