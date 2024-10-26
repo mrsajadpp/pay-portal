@@ -141,6 +141,9 @@ router.post("/hr/update-employee", verify, async (req, res, next) => {
         if (!employeeId) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Employee Id is required" });
 
         req.body.address = { country, state, city, pinCode };
+        req.body.firstName = firstName.toUpperCase();
+        req.body.lastName = lastName.toUpperCase();
+
         let employee = await Employee.updateOne({ employeeId: employeeId }, req.body);
 
         mail.dataUpdated(`${firstName} ${lastName}`, email);
@@ -227,6 +230,9 @@ router.post("/customers/add-customer", verify, async (req, res, next) => {
         if (!customerId) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Employee Id is required" });
 
         req.body.address = { country, state, city, pinCode };
+        req.body.firstName = firstName.toUpperCase();
+        req.body.lastName = lastName.toUpperCase();
+
         let customer = new Customer(req.body);
         await customer.save();
 
@@ -275,6 +281,9 @@ router.post("/customers/update-customer", verify, async (req, res, next) => {
         if (!customerId) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Employee Id is required" });
 
         req.body.address = { country, state, city, pinCode };
+        req.body.firstName = firstName.toUpperCase();
+        req.body.lastName = lastName.toUpperCase();
+        
         let customer = await Customer.updateOne({ customerId: customerId }, req.body);
 
         mail.dataUpdated(`${firstName} ${lastName}`, email);
