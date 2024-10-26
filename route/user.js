@@ -84,7 +84,7 @@ router.post("/hr/add-employee", verify, async (req, res, next) => {
         if (!employeeId) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Employee Id is required" });
 
         let isExist = await Employee.findOne({ employeeId: employeeId }).lean();
-        if (isExist) return res.render("hr/add-employee", { title: "Add New Employee", customer: req.body, error: "The employee Id you entered is already exist." });
+        if (isExist) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "The employee Id you entered is already exist." });
 
         req.body.address = { country, state, city, pinCode };
         req.body.firstName = firstName.toUpperCase();
