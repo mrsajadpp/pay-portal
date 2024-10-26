@@ -357,7 +357,7 @@ router.post("/projects/start-project", verify, async (req, res, next) => {
 
         let customer = await Customer.findOne({ customerId: customerId }).lean();
         mail.projectStarted(`${customer.firstName} ${customer.lastName}`, customer.email, projectName, projectAmount, projectRequirements, projectDescription);
-        mail.notifyProjectManager("sadiq@grovixlab.com", projectName, `${customer.firstName} ${customer.lastName}`, projectAmount, projectRequirements, projectDescription);
+        mail.notifyProjectManager(["sadiq@grovixlab.com", "sajad@grovixlab.com", "adil@grovixlab.com"], projectName, `${customer.firstName} ${customer.lastName}`, projectAmount, projectRequirements, projectDescription);
         return res.redirect("/projects");
     } catch (error) {
         console.error(error);
