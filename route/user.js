@@ -431,6 +431,12 @@ router.post("/invoicing/create-invoice", verify, async (req, res, next) => {
         let invoice = new Invoice(req.body);
         await invoice.save();
 
+        let customer = await Customer.findOne({ customerId: customerId }).lean();
+
+        const dueDateVal = new Date(dueDate).toISOString().split('T')[0];
+
+        mail.sendInvoiceEmail(`${customer.firstName} ${customer.lastName}`, customer.email, project.projectName, project.projectAmount, dueDateVal, "https://rzp.io/rzp/D3uYpTh")
+
         return res.redirect("/invoicing");
     } catch (error) {
         console.error(error);

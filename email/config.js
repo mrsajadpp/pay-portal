@@ -102,5 +102,23 @@ const notifyProjectManager = async (managerEmail, projectTitle, clientName, amou
     }
 };
 
+// Function to send an invoice email
+const sendInvoiceEmail = async (clientName, clientEmail, projectTitle, amountDue, dueDate, paymentLink) => {
+    try {
+        const mailOptions = {
+            from: "Grovix Lab <noreply.grovix@gmail.com>", // Sender address
+            to: clientEmail, // Client's email address
+            subject: "Invoice for Your Project with Grovix Lab", // Subject line
+            text: `Dear ${clientName},\n\nWe hope this message finds you well. Please find the invoice details for your project "${projectTitle}" below:\n\n- **Amount Due**: ${amountDue}\n- **Due Date**: ${dueDate}\n\nTo proceed with the payment, you can use the following link:\n\n${paymentLink}\n\nAlternatively, you may arrange a direct transfer by contacting our Project Manager, Sadiq, at sadiq@grovixlab.com.\n\nThis email has been automatically generated. If you find any attachments or links, please avoid them.\n\nThank you for choosing Grovix Lab!`,
+            html: `<p>Dear ${clientName},</p><p>We hope this message finds you well. Please find the invoice details for your project titled "<strong>${projectTitle}</strong>" below:</p><ul><li><strong>Amount Due</strong>: ${amountDue}</li><li><strong>Due Date</strong>: ${dueDate}</li></ul><p>To proceed with the payment, you can use the following link:</p><p><a href="${paymentLink}">Pay Now</a></p><p>Alternatively, you may arrange a direct transfer by contacting our Project Manager, Sadiq, at <a href="mailto:sadiq@grovixlab.com">sadiq@grovixlab.com</a>.</p><p>This email has been automatically generated. If you find any attachments or links, please avoid them.</p><p>Thank you for choosing Grovix Lab!</p>`,
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Invoice email sent:', info.response);
+    } catch (error) {
+        console.error('Error sending invoice email:', error);
+    }
+};
+
 // Export the functions for use in other modules
-module.exports = { newEmployee, newCustomer, dataUpdated, projectStarted, notifyProjectManager };
+module.exports = { newEmployee, newCustomer, dataUpdated, projectStarted, notifyProjectManager, sendInvoiceEmail };
