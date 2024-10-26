@@ -346,6 +346,9 @@ router.post("/projects/start-project", verify, async (req, res, next) => {
         let project = new Project(req.body);
         await project.save();
 
+        let customer = await Customer.findOne({ customerId: customerId }).lean();
+        mail.projectStarted(`${customer.firstName} ${customer.lastName}`, customer.email, projectName, projectAmount, projectRequirements, projectDescription);
+        mail.notifyProjectManager("sadiq@grovixlab.com", projectName, `${customer.firstName} ${customer.lastName}`, projectAmount, projectRequirements, projectDescription);
         return res.redirect("/projects");
     } catch (error) {
         console.error(error);
