@@ -555,6 +555,10 @@ router.post("/payments/create-payment", verify, async (req, res, next) => {
 
         await Invoice.deleteOne({ _id: new mongoose.Types.ObjectId(invoice._id) });
 
+        let customer = await Customer.findOne({ customerId: invoice.customerId }).lean();
+
+
+        mail.sendPaymentConfirmationEmail(`${customer.firstName} ${customer.lastName}`, customer.email, project.projectName, project.projectAmount)
         return res.redirect("/payments");
     } catch (error) {
         console.error(error);

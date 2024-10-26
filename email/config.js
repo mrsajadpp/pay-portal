@@ -120,5 +120,23 @@ const sendInvoiceEmail = async (clientName, clientEmail, projectTitle, amountDue
     }
 };
 
+// Function to send payment confirmation email
+const sendPaymentConfirmationEmail = async (clientName, clientEmail, projectTitle, amountPaid) => {
+    try {
+        const mailOptions = {
+            from: "Grovix Lab <noreply.grovix@gmail.com>", // Sender address
+            to: clientEmail, // Client's email address
+            subject: "Payment Confirmation for Your Project", // Subject line
+            text: `Dear ${clientName},\n\nWe are pleased to confirm that your payment of ${amountPaid} has been successfully debited for the project titled "${projectTitle}".\n\nThank you for trusting Grovix Lab with your project. We appreciate your prompt payment and look forward to continuing our work together.\n\nThis email has been automatically generated. If you find any attachments or links, please avoid them.\n\nWarm regards,\nGrovix Lab`,
+            html: `<p>Dear ${clientName},</p><p>We are pleased to confirm that your payment of <strong>${amountPaid}</strong> has been successfully debited for the project titled "<strong>${projectTitle}</strong>".</p><p>Thank you for trusting Grovix Lab with your project. We appreciate your prompt payment and look forward to continuing our work together.</p><p>This email has been automatically generated. If you find any attachments or links, please avoid them.</p><p>Warm regards,<br>Grovix Lab</p>`,
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Payment confirmation email sent:', info.response);
+    } catch (error) {
+        console.error('Error sending payment confirmation email:', error);
+    }
+};
+
 // Export the functions for use in other modules
-module.exports = { newEmployee, newCustomer, dataUpdated, projectStarted, notifyProjectManager, sendInvoiceEmail };
+module.exports = { newEmployee, newCustomer, dataUpdated, projectStarted, notifyProjectManager, sendInvoiceEmail, sendPaymentConfirmationEmail };
