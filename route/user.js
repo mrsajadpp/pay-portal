@@ -83,6 +83,9 @@ router.post("/hr/add-employee", verify, async (req, res, next) => {
         if (!department) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Department is required" });
         if (!employeeId) return res.render("hr/add-employee", { title: "Add New Employee", employee: req.body, error: "Employee Id is required" });
 
+        let isExist = await Employee.findOne({ employeeId: employeeId }).lean();
+        if (isExist) return res.render("hr/add-employee", { title: "Add New Employee", customer: req.body, error: "The employee Id you entered is already exist." });
+
         req.body.address = { country, state, city, pinCode };
         req.body.firstName = firstName.toUpperCase();
         req.body.lastName = lastName.toUpperCase();
@@ -229,6 +232,9 @@ router.post("/customers/add-customer", verify, async (req, res, next) => {
         if (!pinCode) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Pin Code is required" });
         if (!customerId) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "Employee Id is required" });
 
+        let isExist = await Customer.findOne({ customerId: customerId }).lean();
+        if (isExist) return res.render("customers/add-customer", { title: "Add New Customer", customer: req.body, error: "The customer Id you entered is already exist." });
+
         req.body.address = { country, state, city, pinCode };
         req.body.firstName = firstName.toUpperCase();
         req.body.lastName = lastName.toUpperCase();
@@ -283,7 +289,7 @@ router.post("/customers/update-customer", verify, async (req, res, next) => {
         req.body.address = { country, state, city, pinCode };
         req.body.firstName = firstName.toUpperCase();
         req.body.lastName = lastName.toUpperCase();
-        
+
         let customer = await Customer.updateOne({ customerId: customerId }, req.body);
 
         mail.dataUpdated(`${firstName} ${lastName}`, email);
