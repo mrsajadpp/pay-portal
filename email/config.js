@@ -398,5 +398,56 @@ const sendPaymentConfirmationEmail = async (clientName, clientEmail, projectTitl
     }
 };
 
+const sendEmployeeAlert = async (mailBody, email, senderName, senderPosition, senderEmail) => {
+    try {
+        const mailOptions = {
+            from: "Grovix Lab <noreply.grovix@gmail.com>", // Sender address
+            to: email, // Client's email address
+            subject: "Payment Confirmation for Your Project", // Subject line
+            text: `Dear Team, ${mailBody} This email has been automatically generated. If you find any attachments or links, please avoid them.`,
+            html: `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Alert - Grovix Lab</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; }
+        .container { width: 100%; max-width: 600px; margin: 0 auto; background-color: #f5f5f5; padding: 20px; }
+        .content { font-size: 16px; color: #333333; line-height: 1.6; text-align: left; }
+        .content p { margin: 10px 0; }
+        .footer { text-align: center; font-size: 12px; color: #888888; padding: 20px; }
+        .footer img { margin-top: 10px; height: 20px; }
+    </style>
+</head>
+<body>
+    <table class="container" align="center">
+        <tr>
+            <td class="content">
+                <p>Dear Team,</p>
+                <p>${mailBody}</p>
+                <p>This email has been automatically generated. If you find any attachments or links, please avoid them.</p>
+                <p>Warm regards,<br><strong>${senderName}</strong><br>${senderPosition}<br>${senderEmail}</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="footer">
+                <img src="https://grovixlab.com/img/grovix-lab.png" alt="Grovix Lab Logo">
+                <p>© Grovix Lab. All rights reserved.</p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+`,
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Payment confirmation email sent:', info.response);
+    } catch (error) {
+        console.error('Error sending payment confirmation email:', error);
+    }
+};
+
 // Export the functions for use in other modules
-module.exports = { newEmployee, newCustomer, dataUpdated, projectStarted, notifyProjectManager, sendInvoiceEmail, sendPaymentConfirmationEmail };
+module.exports = { newEmployee, newCustomer, dataUpdated, projectStarted, notifyProjectManager, sendInvoiceEmail, sendPaymentConfirmationEmail, sendEmployeeAlert };
