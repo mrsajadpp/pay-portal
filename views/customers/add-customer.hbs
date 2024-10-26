@@ -142,12 +142,12 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
     <div class="content">
-        <h2>Add New Customer</h2> 
+        <h2>Add New Customer</h2>
 
         <form action="/customers/add-customer" method="POST">
             <div class="form-row">
@@ -193,7 +193,9 @@
             <button type="submit" class="submit-btn">Add Customer</button>
         </form>
     </div>
-
+    {{#if error}}
+    <script>alert("{{error}}");</script>
+    {{/if}}
 </body>
 
 </html>

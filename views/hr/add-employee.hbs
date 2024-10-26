@@ -142,7 +142,7 @@
         <a href="/projects">Projects</a>
         <a href="/invoicing">Invoicing</a>
         <a href="/payments">Payments</a>
-        
+
     </div>
 
     <!-- Main Content -->
@@ -205,6 +205,10 @@
             <button type="submit" class="submit-btn">Add Employee</button>
         </form>
     </div>
+
+    {{#if error}}
+    <script>alert("{{error}}");</script>
+    {{/if}}
 
 </body>
 
